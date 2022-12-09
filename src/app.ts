@@ -13,6 +13,6 @@ app.use(express.json())
 // 設定路由
 app.use('/todos', todoRouter)
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is running on ${process.env.PORT} port and already to service`)
+app.listen(3000, () => {
+  console.log(`server is running on 3000 port and already to service`)
 })

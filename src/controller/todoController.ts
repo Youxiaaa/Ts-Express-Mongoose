@@ -5,7 +5,7 @@ export default {
     try {
       const newTodo = new todoModel({
         title: req.body.title,
-        isCompleted: req.body.isCompleted
+        isCompleted: false
       })
       await newTodo.save()
       const allTodos = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
