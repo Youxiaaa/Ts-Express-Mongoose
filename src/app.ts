@@ -11,7 +11,7 @@ const app = express()
 
 const corsOptions = {
   origin: [
-    'https://youxiaaa.github.io/vite-express-todos/',
+    'https://youxiaaa.github.io',
     'http://localhost:5173',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
