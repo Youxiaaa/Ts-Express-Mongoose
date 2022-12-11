@@ -11,14 +11,14 @@ const app = express()
 
 const corsOptions = {
   origin: [
-    'https://youxiaaa.github.io',
+    'https://youxiaaa.github.io/vite-express-todos/',
     'http://localhost:5173',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization']
 }
-
-app.use(cors(corsOptions))
+const corsFn =
+  app.use(cors(corsOptions))
 // 設定傳輸資料格式
 app.use(express.json())
 // 設定路由
