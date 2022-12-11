@@ -1,4 +1,5 @@
 import express from 'express'
+const cors = require('cors')
 import path from 'path';
 import dotenv from 'dotenv';
 import todoRouter from './router/todoRouter'
@@ -8,6 +9,16 @@ dotenv.config({ path: path.resolve(__dirname, `./env/${process.env.NODE_ENV}.env
 
 const app = express()
 
+const corsOptions = {
+  origin: [
+    'https://youxiaaa.github.io',
+    'http://localhost:5173',
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+app.use(cors(corsOptions))
 // 設定傳輸資料格式
 app.use(express.json())
 // 設定路由
