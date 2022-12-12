@@ -44,13 +44,20 @@ export default {
       ]
     })
     if (!findTodo) {
-      await todoModel.updateOne({ _id: req.params.id }, req.body)
-      const allTodo = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
-      res.status(201).send({
-        code: 201,
-        message: '修改todo成功',
-        todos: allTodo
-      })
+      try {
+        await todoModel.updateOne({ _id: req.params.id }, req.body)
+        const allTodo = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
+        res.status(201).send({
+          code: 201,
+          message: '修改todo成功',
+          todos: allTodo
+        })
+      } catch (err) {
+        res.status(401).send({
+          code: 401,
+          message: '修改todo失敗'
+        })
+      }
     } else {
       res.status(401).send({
         code: 401,
