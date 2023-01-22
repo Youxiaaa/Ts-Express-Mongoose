@@ -43,10 +43,13 @@ export default {
         { deletedAt: { $eq: null } }
       ]
     })
+
     if (!findTodo) {
       try {
         await todoModel.updateOne({ _id: req.params.id }, req.body)
+
         const allTodo = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
+
         res.status(201).send({
           code: 201,
           message: '修改todo成功',
