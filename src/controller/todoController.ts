@@ -24,6 +24,7 @@ export default {
   get: async (req: any, res: any) => {
     try {
       const todos = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
+      const { user } = req
       res.status(200).send({
         code: 200,
         todos,

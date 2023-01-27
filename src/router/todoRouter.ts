@@ -1,12 +1,13 @@
 import { Router } from 'express'
-import todoController from '../controller/todoController'
+import controllers from '../controller'
 import { filterLanguege } from '../middleware/languege'
+import { verifyJWT } from '../middleware/auth'
 
 const router = Router()
 
-router.get('/get', todoController.get)
-router.post('/add', filterLanguege, todoController.add)
-router.put('/update/:id', todoController.update)
-router.delete('/delete/:id', todoController.delete)
+router.get('/get', verifyJWT, controllers.todoController.get)
+router.post('/add', verifyJWT, filterLanguege, controllers.todoController.add)
+router.put('/update/:id', verifyJWT, controllers.todoController.update)
+router.delete('/delete/:id', verifyJWT, controllers.todoController.delete)
 
 export default router
