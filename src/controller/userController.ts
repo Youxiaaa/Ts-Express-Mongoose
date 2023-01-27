@@ -36,8 +36,8 @@ export default {
       const user = await userModel.findOne({ username })
 
       if (!user) return res.status(404).send({
-        code: 404,
-        message: '找不到使用者'
+        code: 401,
+        message: '帳號或密碼錯誤'
       })
       
       const isValid = await bcrypt.compare(password, user.password)

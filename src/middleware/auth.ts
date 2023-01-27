@@ -7,7 +7,7 @@ export function verifyJWT(req: any, res: any, next: Function) {
       const token = req.headers.authorization.split(' ')[1]
       if (!token) return res.status(401).send({
         code: 401,
-        message: '拒絕查閱'
+        message: '拒絕訪問'
       })
       const decoded = jwt.verify(token, 'secret')
       req.user = decoded
@@ -15,7 +15,7 @@ export function verifyJWT(req: any, res: any, next: Function) {
     } else {
       return res.status(401).send({
         code: 401,
-        message: '拒絕查閱'
+        message: '拒絕訪問'
       })
     }
   } catch (err: any) {
