@@ -35,7 +35,7 @@ export default {
       const { username, password } = req.body
       const user = await userModel.findOne({ username })
 
-      if (!user) return res.status(404).send({
+      if (!user) return res.status(401).send({
         code: 401,
         message: '帳號或密碼錯誤'
       })
