@@ -24,6 +24,7 @@ app.use(express.json())
 // 設定路由
 app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
+app.use('/file', routers.uploadRouter)
 
 app.listen(3001, () => {
   console.log(`server is running on 3001 port and already to service`)

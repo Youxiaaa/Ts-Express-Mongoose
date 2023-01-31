@@ -45,7 +45,7 @@ export default {
         code: 401,
         message: '帳號或密碼錯誤'
       })
-      const accessToken = jwt.sign({ userId: user._id, type: 'accessToken' }, 'secret', { expiresIn: '10m' })
+      const accessToken = jwt.sign({ userId: user._id, type: 'accessToken' }, 'secret', { expiresIn: '1h' })
       const refreshToken = jwt.sign({ userId: user._id, type: 'refreshToken' }, 'refreshSecret', { expiresIn: '1d' })
 
       return res.status(200).send({
@@ -73,7 +73,7 @@ export default {
       const isValid = await verifyToken(refreshToken)
       if (isValid) {
         const refreshDecoded = await jwt.verify(refreshToken, 'refreshSecret')
-        const access_token = jwt.sign({ userId: refreshDecoded.userId, type: 'accessToken' }, 'secret', { expiresIn: '10m' })
+        const access_token = jwt.sign({ userId: refreshDecoded.userId, type: 'accessToken' }, 'secret', { expiresIn: '1h' })
         const refresh_token = jwt.sign({ userId: refreshDecoded.userId, type: 'refreshToken' }, 'refreshSecret', { expiresIn: '1d' })
 
         return res.status(200).send({
