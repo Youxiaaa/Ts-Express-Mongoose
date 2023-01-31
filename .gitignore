@@ -6,3 +6,5 @@ package-lock.json
 
 development.env
 production.env
+
+src/uploads
