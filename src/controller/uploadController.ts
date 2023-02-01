@@ -15,7 +15,7 @@ export default {
         .then((result: any) => {
           res.status(201).json({
             code: 201,
-            message: "上傳檔案成功",
+            message: '上傳檔案成功',
             result: result.path
           })
         })
@@ -26,29 +26,17 @@ export default {
           })
         })
     } catch (err) {
-      res.status(400).send({
-        code: 400,
-        message: req.file
-      })
-    }
-  },
-  get: async (req: any, res: any) => {
-    console.log(req.params.filename)
-    const file = fileModel.findOne({ filename: req.params.filename }, (err: any, file: any) => {
-      console.log(file.path)
-      if (err) {
-        return res.status(400).send({
+      if (req.fileValidationError) {
+        res.status(400).send({
+          code: 400,
+          message: req.fileValidationError
+        })
+      } else {
+        res.status(400).send({
           code: 400,
           message: err
         })
       }
-      if (!file) {
-        return res.status(404).send({
-          code: 404,
-          message: '未找到檔案'
-        })
-      }
-      return res.sendFile(file.path)
-    })
+    }
   }
 }

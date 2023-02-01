@@ -20,8 +20,8 @@ const fileFilter = (req: any, file: any, cb: any) => {
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true)
   } else {
-    req.file = '檔案類型不正確'
-    cb(null, false)
+    req.fileValidationError = '檔案格式不正確'
+    cb(null, false, req.fileValidationError)
   }
 }
 

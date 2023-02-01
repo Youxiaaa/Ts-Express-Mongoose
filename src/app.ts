@@ -21,6 +21,8 @@ const app = express()
 app.use(cors(corsOptions))
 // 設定傳輸資料格式
 app.use(express.json())
+// 設定檔案位置
+app.use('/uploads', express.static('uploads'))
 // 設定路由
 app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
