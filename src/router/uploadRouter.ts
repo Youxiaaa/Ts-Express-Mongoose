@@ -2,10 +2,11 @@ import { Router } from 'express'
 import controllers from '../controller'
 
 import { verifyJWT } from '../middleware/auth'
-import { upload as uploadFunc } from '../middleware/multer'
+import upload from '../middleware/multer'
 
 const router = Router()
 
-router.post('/upload', verifyJWT, uploadFunc.single('file'), controllers.uploadController.upload)
+router.post('/upload', verifyJWT, upload.single('file'), controllers.uploadController.upload)
+router.get('/uploads/:filename', controllers.uploadController.get)
 
 export default router

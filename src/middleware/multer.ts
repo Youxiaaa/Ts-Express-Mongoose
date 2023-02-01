@@ -20,14 +20,17 @@ const fileFilter = (req: any, file: any, cb: any) => {
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true)
   } else {
+    req.file = '檔案類型不正確'
     cb(null, false)
   }
 }
 
-export const upload = multer({
-  storage: storage,
+const upload = multer({
+  storage,
   limits: {
     fileSize: 1024 * 1024 * 5
   },
-  fileFilter: fileFilter
+  fileFilter
 })
+
+export default upload
