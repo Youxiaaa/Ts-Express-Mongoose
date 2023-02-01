@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 const fs = require("fs");
 const multer = require('multer')
 
@@ -10,8 +11,7 @@ const storage = multer.diskStorage({
     cb(null, uploadsDirectory)
   },
   filename: function(req: any, file: any, cb: any) {
-    // cb(null, new Date().toISOString() + file.originalname)
-    cb(null, file.originalname)
+    cb(null, `${dayjs().format('YYYYMMDDhhmmss')}-${file.originalname}`)
   }
 })
 

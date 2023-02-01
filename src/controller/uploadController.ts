@@ -2,6 +2,7 @@ import fileModel from '../models/fileModel'
 
 export default {
   upload: async (req: any, res: any) => {
+    console.log(req.file.path)
     const file: any = new fileModel(
       {
         filename: req.file.filename,

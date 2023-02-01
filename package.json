@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "dev:prod": "NODE_ENV=production nodemon ./dist/app.js",
-    "dev": "NODE_ENV=development nodemon ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
     "build": "tsc"
   },
   "author": "Ryan",
