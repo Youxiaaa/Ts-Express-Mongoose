@@ -1,7 +1,8 @@
+import { Request, Response } from 'express'
 const dertyWord = ['fuck', 'fuckyou', 'ass']
 
-export function filterLanguege(req: any, res: any, next: Function) {
-  const values = Object.values(req.body) as string[]
+export function filterLanguege(req: Request, res: Response, next: Function) {
+  const values: string[] = Object.values(req.body)
 
   values.forEach((str) => {
     // 過濾空白字元

@@ -1,9 +1,10 @@
+import { Request, Response } from 'express'
 import userModel from '../models/userModal'
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 export default {
-  register: async (req: any, res: any) => {
+  register: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body
       const user = await userModel.findOne({ username })
@@ -30,7 +31,7 @@ export default {
       })
     }
   },
-  login: async (req: any, res: any) => {
+  login: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body
       const user = await userModel.findOne({ username })
@@ -61,7 +62,7 @@ export default {
       })
     }
   },
-  refreshToken: async (req: any, res: any) => {
+  refreshToken: async (req: Request, res: Response) => {
     const { refreshToken } = req.body
 
     if (!refreshToken) {

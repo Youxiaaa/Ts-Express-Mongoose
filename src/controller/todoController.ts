@@ -1,7 +1,8 @@
+import { Request, Response } from 'express'
 import todoModel from '../models/todoModel'
 // import dayjs from 'dayjs'
 export default {
-  add: async (req: any, res: any) => {
+  add: async (req: Request, res: Response) => {
     try {
       const newTodo = new todoModel({
         title: req.body.title,
@@ -21,7 +22,7 @@ export default {
       })
     }
   },
-  get: async (req: any, res: any) => {
+  get: async (req: Request, res: Response) => {
     try {
       const todos = await todoModel.find({ deletedAt: { $eq: null } }, 'title isCompleted')
       res.status(200).send({
@@ -36,7 +37,7 @@ export default {
       })
     }
   },
-  update: async (req: any, res: any) => {
+  update: async (req: Request, res: Response) => {
     const findTodo = await todoModel.findOne({
       $and: [
         { _id: { $eq: req.body.id } },
@@ -68,7 +69,7 @@ export default {
       })
     }
   },
-  delete: async (req: any, res: any) => {
+  delete: async (req: Request, res: Response) => {
     const findTodo = await todoModel.findOne({
       $and: [
         { _id: { $eq: req.params.id } },

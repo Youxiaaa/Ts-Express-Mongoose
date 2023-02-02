@@ -1,7 +1,8 @@
+import { Request, Response } from 'express'
 import fileModel from '../models/fileModel'
 
 export default {
-  upload: async (req: any, res: any) => {
+  upload: async (req: Request | any, res: Response) => {
     try {
       const file = new fileModel(
         {
