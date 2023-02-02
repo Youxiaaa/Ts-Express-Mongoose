@@ -16,8 +16,8 @@
   },
   // 納入編譯範圍
   "include": [
-    "src/**/*.ts"
-  ],
+    "src/**/*.ts",
+    "src/swaggerDocs/swagger.js"  ],
   //不納入編譯範圍
   "exclude": [
     "node_modules",

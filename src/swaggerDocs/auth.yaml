@@ -1,0 +1,49 @@
+paths:
+  /user/login:
+    post:
+      tags:
+        - 用戶管理
+      summary: 登入
+      produces:
+      - application/json
+      requestBody:
+        description: 登入
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: 登入成功
+        401:
+          description: 帳號或密碼錯誤
+  /user/register:
+    post:
+      tags:
+        - 用戶管理
+      summary: 註冊
+      produces:
+      - application/json
+      requestBody:
+        description: 註冊
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: 註冊成功
+        401:
+          description: 註冊失敗

@@ -5,7 +5,8 @@ const cors = require('cors')
 import routers from './router'
 // 引入 swagger
 const swaggerUi = require('swagger-ui-express')
-import swaggerSetting from './config/swagger'
+const swaggerJsdoc = require('swagger-jsdoc')
+// import swaggerSetting from './swaggerDocs/swagger'
 
 // 獲得動態環境變數
 // dotenv.config({ path: path.resolve(__dirname, `./env/${process.env.NODE_ENV}.env`) })
@@ -31,7 +32,20 @@ app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
 app.use('/file', routers.uploadRouter)
 // 設定 Swagger
-app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerSetting))
+const swaggerDefinition = {
+  openapi: '3.0.n',
+  info: {
+    title: '開發模板API',
+    version: '1.0.0',
+    description: '開發模板Swagger', // short description of the app
+  },
+};
+const swaggerOptions = {
+  swaggerDefinition,
+  apis: ['./src/**/*.yaml']
+}
+const swaggerSpec = swaggerJsdoc(swaggerOptions)
+app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.listen(3001, () => {
   console.log(`server is running on 3001 port and already to service`)
