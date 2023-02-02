@@ -3,8 +3,8 @@
     "incremental": true, // 啟用增量編譯
     "target": "ESNext", // 編譯成指定的 JavaScript 版本
     "module": "commonjs", // 指定編譯成何種模組
-    "declaration": true, // 產生 '.d.ts' 檔
-    "sourceMap": true, // 產生 '.map' 檔
+    "declaration": true, // 不產生 '.d.ts' 檔
+    "sourceMap": false, // 不產生 '.map' 檔
     "outDir": "./dist", // 指定編譯後的檔案存放點
     "rootDir": "./src", // 載入點的位置
     "removeComments": true, // 移除註解
@@ -14,11 +14,14 @@
     "experimentalDecorators": true, // 啟用裝飾器
     "emitDecoratorMetadata": true // 提供裝飾器 metadata
   },
+  // 納入編譯範圍
   "include": [
-    "src/**/*.ts"
-  ], // 納入編譯範圍
+    "src/**/*.ts",
+    "src/ecosystem.config.js"
+  ],
+  //不納入編譯範圍
   "exclude": [
     "node_modules",
     "dist"
-  ] //不納入編譯範圍
+  ]
 }

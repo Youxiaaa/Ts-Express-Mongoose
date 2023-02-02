@@ -3,6 +3,9 @@ const cors = require('cors')
 // import path from 'path';
 // import dotenv from 'dotenv';
 import routers from './router'
+// 引入 swagger
+const swaggerUi = require('swagger-ui-express')
+import swaggerSetting from './config/swagger'
 
 // 獲得動態環境變數
 // dotenv.config({ path: path.resolve(__dirname, `./env/${process.env.NODE_ENV}.env`) })
@@ -27,6 +30,8 @@ app.use('/uploads', express.static('uploads'))
 app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
 app.use('/file', routers.uploadRouter)
+// 設定 Swagger
+app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerSetting))
 
 app.listen(3001, () => {
   console.log(`server is running on 3001 port and already to service`)

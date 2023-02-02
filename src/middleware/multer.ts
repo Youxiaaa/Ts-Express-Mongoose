@@ -1,6 +1,6 @@
 import { Request } from 'express'
 import dayjs from 'dayjs'
-const fs = require("fs");
+const fs = require("fs")
 const multer = require('multer')
 
 const storage = multer.diskStorage({
