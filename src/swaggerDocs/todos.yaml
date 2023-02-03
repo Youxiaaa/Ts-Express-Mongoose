@@ -1,0 +1,96 @@
+paths:
+  /todos/get:
+    get:
+      security: 
+        - BearerAuth: []
+      tags:
+        - To-Do-List
+      summary: 取得Todo List
+      produces:
+      - application/json
+      requestBody:
+        description: 取得Todo List
+      responses:
+        200:
+          description: 取得成功
+        401:
+          description: 沒有權限
+  /todos/add:
+    post:
+      security: 
+        - BearerAuth: []
+      tags:
+        - To-Do-List
+      summary: 新增Todo
+      produces:
+      - application/json
+      requestBody:
+        description: 新增Todo
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+      responses:
+        201:
+          description: 新增成功
+        401:
+          description: 新增失敗
+  /todos/update/{id}:
+    put:
+      security: 
+        - BearerAuth: []
+      tags:
+        - To-Do-List
+      summary: 修改Todo
+      parameters:
+        - in: path
+          name: id
+          required: true
+      produces:
+      - application/json
+      requestBody:
+        description: 修改Todo
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                isCompleted:
+                  type: boolean
+
+      responses:
+        201:
+          description: 修改成功
+        401:
+          description: 修改失敗
+
+  /todos/delete/{id}:
+    delete:
+      security: 
+        - BearerAuth: []
+      tags:
+        - To-Do-List
+      summary: 刪除Todo
+      parameters:
+        - in: path
+          name: id
+          required: true
+
+      responses:
+        201:
+          description: 刪除成功
+        401:
+          description: 刪除失敗
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

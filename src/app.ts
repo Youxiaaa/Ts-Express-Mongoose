@@ -37,8 +37,8 @@ const swaggerDefinition = {
   info: {
     title: '開發模板API',
     version: '1.0.0',
-    description: '開發模板Swagger', // short description of the app
-  },
+    description: '開發模板Swagger'
+  }
 };
 const swaggerOptions = {
   swaggerDefinition,
