@@ -3,7 +3,7 @@
     "incremental": true, // 啟用增量編譯
     "target": "ESNext", // 編譯成指定的 JavaScript 版本
     "module": "commonjs", // 指定編譯成何種模組
-    "declaration": false, // 不產生 '.d.ts' 檔
+    "declaration": true, // 不產生 '.d.ts' 檔
     "sourceMap": false, // 不產生 '.map' 檔
     "outDir": "./dist", // 指定編譯後的檔案存放點
     "rootDir": "./src", // 載入點的位置
@@ -17,7 +17,8 @@
   // 納入編譯範圍
   "include": [
     "src/**/*.ts",
-    "src/swaggerDocs/swagger.js"  ],
+    "src/swaggerDocs/swagger.js"
+  ],
   //不納入編譯範圍
   "exclude": [
     "node_modules",
