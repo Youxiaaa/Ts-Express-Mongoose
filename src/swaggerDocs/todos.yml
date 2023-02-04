@@ -1,3 +1,8 @@
+openapi: '3.0.n'
+info:
+  title: 開發模板API2
+  version: 1.0.0
+  description: 開發模板Swagger2
 paths:
   /todos/get:
     get:
@@ -5,11 +10,11 @@ paths:
         - BearerAuth: []
       tags:
         - To-Do-List
-      summary: 取得Todo List
+      summary: 取得Todo
       produces:
       - application/json
       requestBody:
-        description: 取得Todo List
+        description: 取得Todo
       responses:
         200:
           description: 取得成功

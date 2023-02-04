@@ -27,10 +27,10 @@ export default {
           })
         })
     } catch (err) {
-      if (req.fileValidationError) {
+      if (req.uploadError) {
         res.status(400).send({
           code: 400,
-          message: req.fileValidationError
+          message: req.uploadError
         })
       } else {
         res.status(400).send({
