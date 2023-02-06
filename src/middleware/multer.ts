@@ -16,19 +16,28 @@ const storage = multer.diskStorage({
   }
 })
 
+const whiteList = [
+  'image/jpg',
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif'
+]
+
 const fileFilter = (req: Request | any, file: any, cb: Function) => {
-  // only accept jpeg and png files
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  //! 只允許白名單內的檔案格式
+  if (whiteList.includes(file.mimetype)) {
     cb(null, true)
   } else {
-    req.fileValidationError = '檔案格式不正確'
-    cb(null, false, req.fileValidationError)
+    req.uploadError = '檔案格式不正確'
+    cb(null, false, req.uploadError)
   }
 }
 
 export const upload = multer({
   storage,
   limits: {
+    //! 只允許檔案為5MB以內
     fileSize: 1024 * 1024 * 5
   },
   fileFilter

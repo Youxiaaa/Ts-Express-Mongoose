@@ -80,11 +80,11 @@ paths:
         - BearerAuth: []
       tags:
         - To-Do-List
-      summary: 取得Todo List
+      summary: 取得Todo
       produces:
       - application/json
       requestBody:
-        description: 取得Todo List
+        description: 取得Todo
       responses:
         200:
           description: 取得成功

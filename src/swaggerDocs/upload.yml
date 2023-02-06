@@ -82,8 +82,8 @@ paths:
         - 檔案管理
       summary: 上傳檔案
       requestBody:
-        description: 上傳檔案
         required: true
+        description: 選擇檔案
         content:
           multipart/form-data:
             schema:
