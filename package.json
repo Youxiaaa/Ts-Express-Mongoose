@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
@@ -21,13 +20,11 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
     "multer": "^1.4.5-lts.1",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-routes-express": "^3.3.2",
     "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.16",
-    "@types/node": "^18.11.18",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.11.19",
     "nodemon-webpack-plugin": "^4.8.1",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
