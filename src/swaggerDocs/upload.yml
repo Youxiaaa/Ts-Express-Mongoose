@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 檔案管理_Upload
+  description: API for Upload
+paths:
+  /user/login:
+    post:
+      tags:
+        - 用戶管理
+      summary: 登入
+      produces:
+      - application/json
+      requestBody:
+        description: 登入
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: 登入成功
+        401:
+          description: 帳號或密碼錯誤
+  /user/register:
+    post:
+      tags:
+        - 用戶管理
+      summary: 註冊
+      produces:
+      - application/json
+      requestBody:
+        description: 註冊
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: 註冊成功
+        401:
+          description: 註冊失敗
+  /user/refreshToken:
+    post:
+      tags:
+        - 用戶管理
+      summary: 刷新Token
+      produces:
+      - application/json
+      requestBody:
+        description: 刷新Token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        200:
+          description: 刷新成功
+        401:
+          description: 刷新失敗
+  /file/upload:
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 檔案管理
+      summary: 上傳檔案
+      requestBody:
+        description: 上傳檔案
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: 上傳成功
+        401:
+          description: 上傳失敗
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

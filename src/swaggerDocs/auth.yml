@@ -1,3 +1,8 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 權限管理_AUTH
+  description: API for Auth
 paths:
   /user/login:
     post:
@@ -69,3 +74,9 @@ paths:
           description: 刷新成功
         401:
           description: 刷新失敗
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
