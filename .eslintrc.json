@@ -12,11 +12,11 @@
   "rules": {
     "quotes": ["error", "single"], // 必須為單引號
     "indent": ["error", 2], // 縮排必須為兩格
-    "semi": ["error", "always"],  // 最後需要加上分號
-    "comma-dangle": ["error", "never"], // 允許使用 commonJS
+    "semi": ["error", "always"], // 最後需要加上分號
+    "comma-dangle": ["error", "never"], // 最後一個不允許逗號
     "eol-last": ["error", "always"], // 結尾必須空一行
     "no-undef": "off",
-    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-var-requires": "off", // 允許使用 commonJS
     "@typescript-eslint/no-explicit-any": "off"
   }
 }
