@@ -30,6 +30,7 @@ npm => 9.4.0
 - jsonwebtoken  //JWT Token
 - multer  //上傳檔案
 - swagger-ui-express //Swagger文件
+- express-rate-limit //流量限制
 ```
 
 ## 目錄結構

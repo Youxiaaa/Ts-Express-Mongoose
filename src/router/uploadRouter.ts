@@ -4,6 +4,6 @@ import middleware from '../middleware'
 
 const router = Router()
 
-router.post('/upload', middleware.verifyJWT, middleware.upload.single('file'), controllers.uploadController.upload)
+router.post('/upload', middleware.uploadLimiter, middleware.verifyJWT, middleware.upload.single('file'), controllers.uploadController.upload)
 
 export default router

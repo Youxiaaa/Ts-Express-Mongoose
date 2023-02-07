@@ -14,6 +14,8 @@ export default {
         url: `${process.env.EXPRESS_BASE_URL}:${process.env.PORT}/swaggerDocs/upload.yaml`,
         name: '檔案管理_Upload'
       }
-    ]
+    ],
+    //! 設定預設位置
+    'urls.primaryName': '待辦事項_Todos'
   }
 }

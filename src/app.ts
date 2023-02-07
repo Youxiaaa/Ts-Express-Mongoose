@@ -4,7 +4,7 @@ const cors = require('cors')
 // 環境變數
 import path from 'path'
 import dotenv from 'dotenv'
-// 路由
+// 引入路由
 import routers from './router'
 // 引入 swagger
 const swaggerUi = require('swagger-ui-express')
@@ -29,10 +29,13 @@ app.use(express.json())
 // 設定檔案位置
 app.use('/uploads', express.static('uploads'))
 app.use('/swaggerDocs', express.static('./src/swaggerDocs'))
+
 // 設定路由
 app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
 app.use('/file', routers.uploadRouter)
+// 反向代理需要設定
+app.set('trust proxy', 1)
 
 // swagger 文件
 import swaggerOptions from './swaggerDocs'

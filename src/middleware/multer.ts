@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 const fs = require("fs")
 const multer = require('multer')
 
+//! 設定檔案存放位置
 const storage = multer.diskStorage({
   destination: function(req: Request, file: any, cb: Function) {
     const uploadsDirectory = './uploads/'
@@ -23,7 +24,7 @@ const whiteList = [
   'image/webp',
   'image/gif'
 ]
-
+//! 過濾檔案種類
 const fileFilter = (req: Request | any, file: any, cb: Function) => {
   //! 只允許白名單內的檔案格式
   if (whiteList.includes(file.mimetype)) {
@@ -33,12 +34,13 @@ const fileFilter = (req: Request | any, file: any, cb: Function) => {
     cb(null, false, req.uploadError)
   }
 }
+//! 設定檔案限制
+const limits = {
+  fileSize: 1024 * 1024 * 5
+}
 
 export const upload = multer({
   storage,
-  limits: {
-    //! 只允許檔案為5MB以內
-    fileSize: 1024 * 1024 * 5
-  },
+  limits,
   fileFilter
 })
