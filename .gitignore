@@ -4,8 +4,8 @@ dist
 
 package-lock.json
 
-development.env
-production.env
+src/dev.env
+src/prod.env
 
 .DS_Store
 
