@@ -13,10 +13,7 @@ const swaggerUi = require('swagger-ui-express');
 dotenv.config({ path: path.resolve(__dirname, `./${process.env.NODE_ENV}.env`) });
 // 設定跨域來源
 const corsOptions = {
-  origin: [
-    'https://ryanyou.com',
-    'http://localhost:3000'
-  ],
+  origin: [ `${process.env.CORS_ALLOW_URL}` ],
   methods: 'GET,PUT,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization']
 };
