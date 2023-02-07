@@ -23,13 +23,13 @@ npm => 9.4.0
 ## 相關依賴
 ```bash
 - bcrypt //加密
-- cors  //跨域
+- cors  //跨域設定
 - dayjs  //日期處理 
 - dotenv  //環境變數
+- cross-env // 環境變數設定
 - jsonwebtoken  //JWT Token
 - multer  //上傳檔案
-- swagger-jsdoc //Swagger設定
-- swagger-ui-express //Swagger
+- swagger-ui-express //Swagger文件
 ```
 
 ## 目錄結構

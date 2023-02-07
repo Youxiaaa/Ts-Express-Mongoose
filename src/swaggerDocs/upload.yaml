@@ -54,6 +54,8 @@ paths:
           description: 註冊失敗
   /user/refreshToken:
     post:
+      security:
+        - BearerAuth: []
       tags:
         - 用戶管理
       summary: 刷新Token

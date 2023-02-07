@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 export default {
+  // 註冊
   register: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body
@@ -31,6 +32,7 @@ export default {
       })
     }
   },
+  // 登入
   login: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body
@@ -62,44 +64,76 @@ export default {
       })
     }
   },
+  // 刷新Token
   refreshToken: async (req: Request, res: Response) => {
     const { refreshToken } = req.body
+    const { authorization } = req.headers as any
 
-    if (!refreshToken) {
+    //! accessToken || refreshToken 任一個沒有 reject
+    if (!authorization || !refreshToken) {
       return res.status(401).send({
         code: 401,
         message: '拒絕訪問'
       })
-    } else {
-      const isValid = await verifyToken(refreshToken)
-      if (isValid) {
-        const refreshDecoded = await jwt.verify(refreshToken, 'refreshSecret')
-        const access_token = jwt.sign({ userId: refreshDecoded.userId, type: 'accessToken' }, 'secret', { expiresIn: '1h' })
-        const refresh_token = jwt.sign({ userId: refreshDecoded.userId, type: 'refreshToken' }, 'refreshSecret', { expiresIn: '1d' })
+    }
 
-        return res.status(200).send({
-          code: 200,
-          message: '刷新Token成功',
-          access_token,
-          refresh_token
-        })
-      } else {
-        return res.status(401).send({
-          code: 401,
-          message: '刷新Token失敗'
-        })
-      }
+    //! 取得 'Bearer' 後的 Token 字段
+    const accessToken = authorization.split(' ')[1]
+    const { isValid: refreshTokenValid, userId: refreshUserId } = await verifyToken(refreshToken, 'refreshSecret')
+    const { isValid: accessTokenValid, userId: accessUserId } = await verifyToken(accessToken, 'secret', true)
+
+    //! 判斷其中一個失敗 reject
+    if (!refreshTokenValid || !accessTokenValid) {
+      return res.status(401).send({
+        code: 401,
+        message: '刷新Token失敗'
+      })
+    }
+
+    //! 兩個 userId 不同 reject
+    if (refreshUserId !== accessUserId) {
+      return res.status(401).send({
+        code: 401,
+        message: '刷新Token失敗'
+      })
+    }
+
+    try {
+      const access_token = jwt.sign({ userId: accessUserId, type: 'accessToken' }, 'secret', { expiresIn: '1h' })
+      const refresh_token = jwt.sign({ userId: refreshUserId, type: 'refreshToken' }, 'refreshSecret', { expiresIn: '1d' })
+
+      return res.status(200).send({
+        code: 200,
+        message: '刷新Token成功',
+        access_token,
+        refresh_token
+      })
+    }
+    catch (err) {
+      return res.status(401).send({
+        code: 401,
+        message: '刷新Token失敗'
+      })
     }
   }
 }
 
-async function verifyToken (refreshToken: string) {
+async function verifyToken (tokenStr: string, secretStr: string, isIgnore: boolean = false) {
   try {
-    const refreshDecoded = await jwt.verify(refreshToken, 'refreshSecret')
-  
-    if (refreshDecoded) return true
-    return false
+    const decoded = await jwt.verify(tokenStr, secretStr, { ignoreExpiration: isIgnore }) //! ignoreExpiration 忽略過期
+
+    if (decoded) {
+      return {
+        userId: decoded.userId,
+        isValid: true
+      }
+    }
+    return {
+      isValid: false
+    }
   } catch (err) {
-    return false
+    return {
+      isValid: false
+    }
   }
 }

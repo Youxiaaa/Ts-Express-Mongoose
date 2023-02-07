@@ -1,7 +1,10 @@
 import express from 'express'
+// 跨域
 const cors = require('cors')
+// 環境變數
 import path from 'path'
 import dotenv from 'dotenv'
+// 路由
 import routers from './router'
 // 引入 swagger
 const swaggerUi = require('swagger-ui-express')
@@ -31,8 +34,9 @@ app.use('/todos', routers.todoRouter)
 app.use('/user', routers.userRouter)
 app.use('/file', routers.uploadRouter)
 
-// 設定 Swagger
+// swagger 文件
 import swaggerOptions from './swaggerDocs'
+// 設定 Swagger
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(null, swaggerOptions))
 
 app.listen(process.env.PORT, () => {
