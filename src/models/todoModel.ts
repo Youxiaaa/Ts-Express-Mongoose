@@ -1,4 +1,4 @@
-import mongoose from '../config/dbConfig'
+import mongoose from '../config/dbConfig';
 
 const todoSchema = new mongoose.Schema({
   title: {
@@ -13,8 +13,8 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: null
   }
-}, { timestamps: true })
+}, { timestamps: true });
 
-const todoModel = mongoose.model('Todos', todoSchema)
+const todoModel = mongoose.model('Todos', todoSchema);
 
-export default todoModel
+export default todoModel;

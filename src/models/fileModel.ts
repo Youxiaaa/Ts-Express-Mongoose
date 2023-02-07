@@ -1,4 +1,4 @@
-import mongoose from '../config/dbConfig'
+import mongoose from '../config/dbConfig';
 
 const fileSchema = new mongoose.Schema({
   filename: {
@@ -13,8 +13,8 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-})
+});
 
-const fileModel = mongoose.model('File', fileSchema)
+const fileModel = mongoose.model('File', fileSchema);
 
-export default fileModel
+export default fileModel;

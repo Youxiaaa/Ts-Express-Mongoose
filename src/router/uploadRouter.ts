@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import controllers from '../controller'
-import middleware from '../middleware'
+import { Router } from 'express';
+import controllers from '../controller';
+import middleware from '../middleware';
 
-const router = Router()
+const router = Router();
 
-router.post('/upload', middleware.uploadLimiter, middleware.verifyJWT, middleware.upload.single('file'), controllers.uploadController.upload)
+router.post('/upload', middleware.uploadLimiter, middleware.verifyJWT, middleware.upload.single('file'), controllers.uploadController.upload);
 
-export default router
+export default router;

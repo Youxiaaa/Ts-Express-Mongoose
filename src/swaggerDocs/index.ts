@@ -18,4 +18,4 @@ export default {
     //! 設定預設位置
     'urls.primaryName': '待辦事項_Todos'
   }
-}
+};
