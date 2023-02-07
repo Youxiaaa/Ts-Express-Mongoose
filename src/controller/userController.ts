@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import userModel from '../models/userModal';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 import { verifyToken } from '../utils';
 
 export default {
@@ -84,16 +83,8 @@ export default {
     const { isValid: refreshTokenValid, userId: refreshUserId } = await verifyToken(refreshToken, 'refreshSecret');
     const { isValid: accessTokenValid, userId: accessUserId } = await verifyToken(accessToken, 'secret', true);
 
-    //! 判斷其中一個失敗 reject
-    if (!refreshTokenValid || !accessTokenValid) {
-      return res.status(401).send({
-        code: 401,
-        message: '刷新Token失敗'
-      });
-    }
-
-    //! 兩個 userId 不同 reject
-    if (refreshUserId !== accessUserId) {
+    //! 判斷其中一個驗證失敗或者兩個 userId 不同 reject
+    if ((!refreshTokenValid || !accessTokenValid) || (refreshUserId !== accessUserId)) {
       return res.status(401).send({
         code: 401,
         message: '刷新Token失敗'
@@ -107,35 +98,16 @@ export default {
       return res.status(200).send({
         code: 200,
         message: '刷新Token成功',
-        access_token,
-        refresh_token
+        accessToken: access_token,
+        refreshToken: refresh_token
       });
     }
-    catch (err) {
+    catch (error) {
       return res.status(401).send({
         code: 401,
-        message: '刷新Token失敗'
+        message: '刷新Token失敗',
+        error
       });
     }
   }
 };
-
-// async function verifyToken (tokenStr: string, secretStr: string, isIgnore = false) {
-//   try {
-//     const decoded = await jwt.verify(tokenStr, secretStr, { ignoreExpiration: isIgnore }); //! ignoreExpiration 忽略過期
-
-//     if (decoded) {
-//       return {
-//         userId: decoded.userId,
-//         isValid: true
-//       };
-//     }
-//     return {
-//       isValid: false
-//     };
-//   } catch (err) {
-//     return {
-//       isValid: false
-//     };
-//   }
-// }
