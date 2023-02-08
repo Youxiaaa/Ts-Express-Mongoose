@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
+
+const uri: any = 'mongodb://127.0.0.1:27017/demoDB';
+const connectOptions: any = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+};
+
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/demoDB')
-  .then(() => console.log('Connect to MongoDB'))
-  .catch((err: string) => console.log('Failed to connect MongoDB', err));
+mongoose.connect(uri, connectOptions, () => console.log('Mongoose is connected.'));
 
 export default mongoose;
