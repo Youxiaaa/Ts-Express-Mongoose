@@ -17,7 +17,7 @@
   // 納入編譯範圍
   "include": [
     "src/**/*.ts"
-  ],
+, "src/migrations/20230209_add_user_phone.ts_phosrc/migrations/20230209_add_user_phone.ts_add_user_phone.ts", "src/migrations/20230209_add_user_email.ts_emasrc/migrations/20230209_add_user_email.ts_add_user_email.ts"  ],
   //不納入編譯範圍
   "exclude": [
     "node_modules",

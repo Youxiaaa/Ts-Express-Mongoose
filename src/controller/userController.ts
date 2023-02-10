@@ -8,7 +8,7 @@ export default {
   // 註冊
   register: async (req: Request, res: Response) => {
     try {
-      const { username, password } = req.body;
+      const { username, password, phone, age, email } = req.body;
       const user = await userModel.findOne({ username });
 
       if (user) {
@@ -18,7 +18,7 @@ export default {
         });
       }
 
-      const newUser = new userModel({ username, password });
+      const newUser = new userModel({ username, password, phone, age, email });
       newUser.password = await bcrypt.hash(password, 10);
       await newUser.save();
 
@@ -68,7 +68,7 @@ export default {
   // 刷新Token
   refreshToken: async (req: Request, res: Response) => {
     const { refreshToken } = req.body;
-    const { authorization } = req.headers as any;
+    const { authorization } = req.headers;
 
     //! accessToken || refreshToken 任一個沒有 reject
     if (!authorization || !refreshToken) {
